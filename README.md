@@ -1,105 +1,106 @@
-# US Flight Delay Performance Dashboard
+# ✈️ US Flight Delay Performance Dashboard
 
-<p align="center">
-  <strong>Interactive Power BI analysis of airline punctuality, airport congestion, delay causes and seasonal flight-performance patterns across the United States.</strong>
-</p>
+![Power BI](https://img.shields.io/badge/Power%20BI-Data%20Visualization-F2C811?logo=powerbi&logoColor=black)
+![Power Query](https://img.shields.io/badge/Power%20Query-Data%20Transformation-217346)
+![DAX](https://img.shields.io/badge/DAX-Analytics-0078D4)
+![Data Model](https://img.shields.io/badge/Data%20Model-Star%20Schema-6A5ACD)
+![Status](https://img.shields.io/badge/Status-Completed-success)
 
-<p align="center">
-  <img src="https://img.shields.io/badge/Power%20BI-Data%20Visualisation-F2C811?style=for-the-badge&logo=powerbi&logoColor=000000" alt="Power BI">
-  <img src="https://img.shields.io/badge/Power%20Query-Data%20Preparation-217346?style=for-the-badge" alt="Power Query">
-  <img src="https://img.shields.io/badge/DAX-Analytical%20Measures-5B2C6F?style=for-the-badge" alt="DAX">
-  <img src="https://img.shields.io/badge/Star%20Schema-Dimensional%20Modelling-1F6FEB?style=for-the-badge" alt="Star Schema">
-</p>
+An interactive **Power BI dashboard** developed to analyse US flight operations, airline performance, airport congestion, seasonal delay patterns, cancellation rates and the major causes of flight delays.
 
-<p align="center">
-  <img src="assets/dashboard-preview.png" alt="US Flight Delay Performance Dashboard" width="100%">
-</p>
-
-<p align="center">
-  <a href="./US%20Flight%20Delays.pbix"><strong>Download Power BI Dashboard</strong></a>
-  &nbsp;&nbsp;|&nbsp;&nbsp;
-  <a href="./US-Flight-Delay-Analysis-Presentation.pdf"><strong>View Project Presentation</strong></a>
-</p>
+The project demonstrates an end-to-end business intelligence workflow, including data cleaning, Power Query transformation, dimensional modelling, DAX measure development, interactive dashboard design and analytical insight generation.
 
 ---
 
-## Project Overview
+## 📊 Dashboard Preview
 
-Flight delays affect passengers, airlines and airport operations. This project converts raw US flight records into an interactive Power BI dashboard that helps users identify performance trends, compare airlines, examine airport-level congestion and understand the main causes of disruption.
-
-The solution combines:
-
-- Data cleaning and transformation in Power Query
-- Dimensional modelling using a star-schema approach
-- DAX measures for operational KPIs
-- Interactive filtering by flight-distance category
-- Visual analytics for airline, airport, temporal and geographic comparison
-
-The final dashboard provides a concise operational view of more than five million flight records.
+![US Flight Delay Performance Dashboard](assets/dashboard-preview.png)
 
 ---
 
-## Dashboard Highlights
+## 🎯 Project Objective
 
-| KPI | Result | Interpretation |
-|---|---:|---|
-| Total Flights | 5M+ | Large-scale view of US flight operations |
-| On-Time Rate | 68.9% | Share of flights meeting the defined on-time condition |
-| Average Arrival Delay | -2.06 minutes | Flights arrived slightly early on average across the full dataset |
-| Cancellation Rate | 1.71% | Proportion of scheduled flights recorded as cancelled |
+The objective of this project was to transform raw US flight operational data into a structured and interactive analytical dashboard.
 
-> **Important:** A negative arrival-delay value represents an early arrival, not a worsening delay.
+The dashboard helps answer key operational questions such as:
 
----
-
-## Business Questions Answered
-
-The dashboard was designed to answer the following questions:
-
-1. How does average arrival delay change throughout the year?
-2. Which airlines perform best and worst against scheduled arrival times?
-3. Which airports account for the largest delay volumes?
-4. What are the dominant causes of delay?
-5. How does flight distance affect punctuality and cancellation performance?
-6. Where is flight activity geographically concentrated?
+- Which airlines demonstrate the strongest arrival performance?
+- Which airports experience the highest number of delays?
+- How does flight performance change throughout the year?
+- What are the main causes of flight delays?
+- How does route distance affect on-time performance?
+- Which airports may be affected by congestion-related inefficiencies?
 
 ---
 
-## Data Preparation and Feature Engineering
+## 📌 Key Performance Indicators
 
-The raw operational data was prepared in Power Query before being loaded into the analytical model.
+| KPI | Result |
+|---|---:|
+| Total Flights | 5M |
+| On-Time Rate | 68.9% |
+| Average Arrival Delay | -2.06 minutes |
+| Cancellation Rate | 1.71% |
+
+A negative average arrival delay indicates that flights arrived slightly earlier than their scheduled arrival time on average.
+
+---
+
+## 🗂️ Dataset Overview
+
+The dataset contains operational records for US domestic flights, including:
+
+- Airline identifier
+- Origin and destination airports
+- Flight date
+- Scheduled departure and arrival times
+- Actual departure and arrival times
+- Arrival and departure delays
+- Flight distance
+- Air time
+- Cancellation and diversion indicators
+- Weather delay
+- Airline delay
+- Air system delay
+- Security delay
+- Late aircraft delay
+
+---
+
+## 🧹 Data Preparation and Transformation
+
+The dataset was cleaned and transformed using **Power Query** before being loaded into the Power BI data model.
 
 ### Data Cleaning
 
-- Replaced missing delay-cause values with zero where appropriate
+- Replaced missing delay-cause values with zero
 - Standardised column data types
 - Removed invalid or inconsistent records
-- Prepared numeric fields for reliable aggregation
+- Prepared numerical fields for accurate aggregation
+- Checked key columns for missing and incorrect values
 
 ### Time Standardisation
 
-- Converted numeric `HHMM` fields into valid time values
-- Created a complete flight-date field from year, month and day columns
+- Converted numeric HHMM values into proper time format
+- Created a complete flight date using year, month and day fields
 - Derived month name, month number, quarter and day-of-week attributes
+- Created a dedicated date dimension for time-based analysis
 
-### Delay Engineering
+### Delay Classification
 
-Flights were classified into operational categories:
+Flights were grouped into the following delay categories:
 
-| Category | Definition |
+| Delay Category | Definition |
 |---|---|
-| On Time | Arrival delay of 0 minutes or less |
-| Minor Delay | Arrival delay from 1 to 15 minutes |
-| Major Delay | Arrival delay greater than 15 minutes |
+| On Time | Delay of 0 minutes or less |
+| Minor Delay | Delay between 1 and 15 minutes |
+| Major Delay | Delay greater than 15 minutes |
 
-Additional fields included:
-
-- On-time indicator
-- Total-delay metric
-- Cancellation and diversion indicators
-- Delay-cause values for airline, air-system, weather, security and late-aircraft disruption
+An **On-Time Flag** was also created to support the calculation of on-time performance.
 
 ### Distance Segmentation
+
+Flights were classified into distance bands:
 
 | Distance Band | Definition |
 |---|---|
@@ -107,219 +108,268 @@ Additional fields included:
 | Medium Haul | 501 to 1,500 miles |
 | Long Haul | More than 1,500 miles |
 
-This segmentation enables like-for-like comparison across different route types.
+This segmentation enables performance comparison across different route types.
 
 ---
 
-## Data Model
+## 🏗️ Data Modelling
 
-A star-schema design separates measurable flight activity from descriptive attributes used for slicing and filtering.
+A **star schema** was implemented to improve model clarity, filtering behaviour and analytical performance.
 
-```mermaid
-erDiagram
-    DimDate ||--o{ flights : filters
-    airlines ||--o{ flights : filters
-    airports ||--o{ flights : "origin and destination"
+### Fact Table
 
-    DimDate {
-        date Date
-        string MonthName
-        int MonthNumber
-        string DayOfWeek
-    }
+The central flight table contains transactional flight records and measures such as:
 
-    airlines {
-        string IATA_CODE
-        string AIRLINE
-    }
+- Arrival delay
+- Departure delay
+- Distance
+- Air time
+- Cancellation indicator
+- Delay-cause values
 
-    airports {
-        string IATA_CODE
-        string AIRPORT
-        string CITY
-        string STATE
-        float LATITUDE
-        float LONGITUDE
-    }
+### Dimension Tables
 
-    flights {
-        date FlightDate
-        string AIRLINE
-        string ORIGIN_AIRPORT
-        string DESTINATION_AIRPORT
-        float ARRIVAL_DELAY
-        float DEPARTURE_DELAY
-        float DISTANCE
-        int CANCELLED
-    }
+- **DimDate:** Date, month, quarter and day-of-week attributes
+- **Airlines:** Airline codes and airline names
+- **Airports:** Airport codes, cities, states and geographic details
+
+### Model Structure
+
+```text
+                    DimDate
+                       |
+                       |
+Airlines -------- Fact_Flights -------- Airports
+                       |
+                       |
+             Destination Airport
 ```
 
-### Why a Star Schema?
-
-- Simplifies relationships and report navigation
-- Improves filtering and analytical performance
-- Separates numeric measures from descriptive dimensions
-- Supports consistent calculations across visuals
-- Makes the model easier to maintain and extend
+The fact table stores operational flight data, while the dimension tables provide descriptive attributes for filtering and analysis.
 
 ---
 
-## Core Measures
+## 📐 Key DAX Measures
 
-The dashboard uses DAX measures to calculate and present key operational indicators, including:
+```DAX
+Total Flights =
+COUNTROWS(flights)
+```
 
-- Total Flights
-- On-Time Flights
-- On-Time Rate
-- Average Arrival Delay
-- Average Departure Delay
-- Cancelled Flights
-- Cancellation Rate
-- Major and Minor Delay Counts
-- Delay-Cause Totals
+```DAX
+Average Arrival Delay =
+AVERAGE(flights[ARRIVAL_DELAY])
+```
 
-These measures respond dynamically to report filters and distance-band selections.
+```DAX
+Cancelled Flights =
+CALCULATE(
+    COUNTROWS(flights),
+    flights[CANCELLED] = 1
+)
+```
+
+```DAX
+Cancellation Rate =
+DIVIDE(
+    [Cancelled Flights],
+    [Total Flights],
+    0
+)
+```
+
+```DAX
+On-Time Rate =
+DIVIDE(
+    CALCULATE(
+        COUNTROWS(flights),
+        flights[ARRIVAL_DELAY] <= 0
+    ),
+    [Total Flights],
+    0
+)
+```
 
 ---
 
-## Dashboard Components
+## 📈 Dashboard Visualisations
 
 ### KPI Cards
-Provide immediate visibility of total flight volume, punctuality, average arrival delay and cancellations.
 
-### Monthly Trend Line
-Shows how average arrival performance changes across the year and highlights seasonal variation.
+The KPI cards provide a high-level overview of:
 
-### Airline Comparison
-Ranks carriers by average arrival delay, making performance differences and outliers easier to identify.
+- Total flights
+- On-time rate
+- Average arrival delay
+- Cancellation rate
 
-### Delay-Cause Breakdown
-Displays the relative contribution of operational delay categories such as airline and air-system delays.
+### Monthly Delay Trend
+
+A line chart displays the average arrival delay by month, helping identify seasonal patterns and periods of operational disruption.
+
+### Airline Performance Comparison
+
+A bar chart compares the average arrival delay across airlines, helping identify stronger-performing carriers and performance outliers.
+
+### Delay Cause Analysis
+
+A pie chart displays the contribution of major delay causes, including:
+
+- Airline delays
+- Air system delays
+- Weather delays
+- Security delays
+- Late aircraft delays
 
 ### Airport Performance Matrix
-Compares major delays, minor delays, on-time flights and total flight activity across high-volume origin airports.
 
-### Geographic Map
-Shows the spatial distribution of flights and highlights major traffic hubs.
+A conditional-formatting matrix compares:
 
-### Distance-Band Slicer
-Allows users to compare all flights with short-, medium- and long-haul operations.
+- Major delays
+- Minor delays
+- On-time flights
+- Unknown delay classifications
+- Total flight volume
 
----
+### Geographic Flight Map
 
-## Key Insights
+The geographic map visualises flight activity by city and highlights major airport hubs and areas with high traffic concentration.
 
-- Overall on-time performance is **68.9%**, indicating a meaningful opportunity for operational improvement.
-- Average arrival delay varies substantially by month, demonstrating clear seasonal changes in schedule performance.
-- Several airlines record near-zero or negative average arrival delays, while others show notably higher average lateness.
-- High-volume hubs such as **ATL, ORD, DFW and DEN** contribute large absolute delay counts because they process significant traffic volumes.
-- Minor delays occur more frequently than major delays across most of the busiest airports.
-- Airline and air-system issues account for a large share of the recorded delay minutes.
-- Short-haul flights show slightly stronger on-time performance than long-haul flights in the dashboard comparison.
+### Interactive Filtering
 
-> High delay volume should not automatically be interpreted as poor airport performance. A heavily used hub may record more delayed flights simply because it handles more flights. Delay rates should therefore be assessed alongside total traffic.
+A distance-band slicer allows users to compare:
 
----
-
-## Visual Design Approach
-
-The report applies consistent visual-encoding principles to improve readability and decision support:
-
-- **Position:** Bar and line charts support accurate comparison across categories and time.
-- **Colour:** Green represents on-time activity, orange represents minor delays and red represents major delays.
-- **Size:** Geographic intensity communicates relative flight volume.
-- **Consistency:** Repeated layouts, labels and scales reduce visual clutter.
-- **Interactivity:** Slicers allow users to explore route-distance segments without changing pages.
+- Short-haul flights
+- Medium-haul flights
+- Long-haul flights
 
 ---
 
-## Tools and Skills Demonstrated
+## 🔍 Key Insights
 
-- Microsoft Power BI Desktop
-- Power Query and data transformation
-- DAX measure development
-- Dimensional modelling
-- Star-schema design
-- Data cleaning and feature engineering
-- KPI design
-- Interactive dashboard development
-- Geographic and temporal analysis
-- Analytical storytelling
+- Overall on-time performance was approximately **68.9%**.
+- Arrival-delay performance fluctuated across different months.
+- September and October demonstrated stronger negative arrival-delay averages than several earlier months.
+- Several airlines recorded near-zero or negative average arrival delays, indicating stronger schedule reliability.
+- Major delays were concentrated among a smaller number of high-traffic airports.
+- Airports such as **ATL, ORD, DFW and DEN** contributed high total delay volumes.
+- High flight volumes were associated with larger delay counts, suggesting possible congestion-related inefficiencies.
+- Minor delays occurred more frequently than major delays across most airports.
+- Short-haul flights demonstrated slightly stronger on-time performance than medium and long-haul flights.
+- Airline-related and air-system delays were among the major contributors to overall delay duration.
 
 ---
 
-## Repository Structure
+## 🛠️ Tools and Technologies
+
+| Tool | Purpose |
+|---|---|
+| Power BI Desktop | Dashboard development and visual analytics |
+| Power Query | Data cleaning and transformation |
+| DAX | KPI and analytical measure development |
+| Star Schema | Dimensional data modelling |
+| Bing Maps | Geographic flight analysis |
+| GitHub | Version control and project documentation |
+| Git LFS | Storage of the large Power BI file |
+
+---
+
+## 📁 Repository Structure
 
 ```text
 us-flight-delay-performance-dashboard/
-|
-|-- US Flight Delays.pbix
-|-- US-Flight-Delay-Analysis-Presentation.pdf
-|-- README.md
-|-- assets/
-|   `-- dashboard-preview.png
-|-- .gitattributes
-`-- .gitignore
+│
+├── README.md
+├── US Flight Delays.pbix
+├── team14-data visualization (1).pdf
+│
+└── assets/
+    └── dashboard-preview.png
 ```
 
 ---
 
-## How to Run the Dashboard
+## 🚀 How to Use the Dashboard
 
-The Power BI file is stored using Git Large File Storage.
+1. Clone the repository:
 
 ```bash
-git lfs install
 git clone https://github.com/Muhammad-Siraj-Bilal/us-flight-delay-performance-dashboard.git
+```
+
+2. Open the project folder:
+
+```bash
 cd us-flight-delay-performance-dashboard
 ```
 
-Then open:
+3. Install Git LFS and download the Power BI file:
 
-```text
-US Flight Delays.pbix
+```bash
+git lfs install
+git lfs pull
 ```
 
-in Microsoft Power BI Desktop.
+4. Open the `.pbix` file using **Microsoft Power BI Desktop**.
+
+5. Use the distance-band slicer and interactive visuals to explore flight performance.
+
+> Power BI Desktop is required to open and interact with the PBIX file.
 
 ---
 
-## Analytical Considerations
+## 💡 Skills Demonstrated
 
-- The results depend on the quality and coverage of the source dataset.
-- The on-time classification used in this project treats an arrival delay of zero minutes or less as on time.
-- Average delay values can hide variation, so they should be interpreted alongside flight counts and delay categories.
-- Airport delay totals are influenced by traffic volume and should not be treated as a normalised performance ranking.
-- Geographic visuals show concentration and distribution, but they do not establish causality.
-
----
-
-## Potential Future Enhancements
-
-- Add delay rates per airline and airport to complement absolute delay totals
-- Introduce route-level drill-through analysis
-- Add custom tooltips and detailed airport profiles
-- Create weekday, hour-of-day and seasonal comparisons
-- Analyse cancellation reasons separately from arrival delays
-- Build predictive models for delay-risk estimation
-- Publish an interactive version through Power BI Service
-- Add a formal data dictionary and DAX measure catalogue
+- Business intelligence development
+- Data cleaning and preparation
+- Power Query transformation
+- Dimensional data modelling
+- Star-schema implementation
+- DAX measure development
+- KPI design
+- Interactive dashboard development
+- Time-series analysis
+- Geographic data visualisation
+- Operational performance analysis
+- Data storytelling
 
 ---
 
-## Academic Context
+## 🔮 Future Improvements
 
-This dashboard was developed as a **Team 14** academic project for **CST4245 - Data Visualisation, Computer Vision and Imaging**. It demonstrates the end-to-end process of preparing operational data, designing a dimensional model and communicating analytical findings through an interactive business-intelligence dashboard.
+Potential future extensions include:
+
+- Integration of live weather data
+- Airport congestion forecasting
+- Machine-learning-based delay prediction
+- Route-level performance analysis
+- Drill-through pages for individual airlines and airports
+- Dynamic tooltip pages
+- Year-over-year performance comparison
+- Financial impact estimation for flight delays
+- Deployment through Power BI Service
 
 ---
 
-## Author
+## 👥 Academic Project
 
-**Muhammad Siraj Bilal**  
-GitHub: [@Muhammad-Siraj-Bilal](https://github.com/Muhammad-Siraj-Bilal)
+This dashboard was developed as part of a **Team 14 academic project** for:
+
+**CST4245 – Data Visualisation, Computer Vision and Imaging**
+
+The project focused on applying dimensional modelling, visual analytics and business intelligence techniques to a large operational flight dataset.
 
 ---
 
-<p align="center">
-  If this project was useful, consider giving the repository a star.
-</p>
+## 👤 Author
+
+**Muhammad Siraj Bilal**
+
+- GitHub: [Muhammad-Siraj-Bilal](https://github.com/Muhammad-Siraj-Bilal)
+- Repository: [US Flight Delay Performance Dashboard](https://github.com/Muhammad-Siraj-Bilal/us-flight-delay-performance-dashboard)
+
+---
+
+## ⭐ Support
+
+If you found this project useful or interesting, please consider giving the repository a **star**.
